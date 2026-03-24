@@ -1,0 +1,28 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore logs
+*.log
+
+# Ignore node_modules (if using npm)
+node_modules/
+
+# Ignore build/dist folders
+build/
+dist/
+
+# Keep images folder and HTML file
+!images/
+!*.html
+!*.md

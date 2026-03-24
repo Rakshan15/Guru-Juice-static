@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guru Brothers Fruits & Juice Shop - Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Nunito:wght@300;400;600;700;800&family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  /* ===== CSS VARIABLES ===== */
+  :root {
+    --green-dark: #0d4f2d;
+    --green: #1a7f4e;
+    --green-light: #2ea05f;
+    --green-pale: #e8f5e8;
+    --yellow: #ffc107;
+    --yellow-light: #ffeb3b;
+    --orange: #ff6b35;
+    --orange-light: #ff8c42;
+    --cream: #fefdf8;
+    --white: #ffffff;
+    --dark: #0a0a0a;
+    --text: #2c2c2c;
+    --text-muted: #6c7280;
+    --shadow: 0 25px 80px rgba(0,0,0,0.15);
+    --shadow-sm: 0 8px 30px rgba(0,0,0,0.12);
+    --radius: 24px;
+    --radius-lg: 40px;
+    --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  /* ===== RESET ===== */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ===== MODERN FRUIT CARDS ===== */
+  .fruit-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 10px 40px rgba(13,79,45,0.15);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .fruit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+    z-index: 1;
+  }
+
+  .fruit-card:hover {
+    transform: translateY(-15px) rotateX(5deg) scale(1.05);
+    box-shadow: 0 20px 60px rgba(13,79,45,0.25);
+  }
+
+  .fruit-card:hover::before {
+    transform: translateX(100%);
+  }
+
+  .fruit-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  }
+
+  .fruit-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: brightness(1) saturate(1.2);
+  }
+
+  .fruit-card:hover .fruit-image {
+    transform: scale(1.1) rotate(2deg);
+    filter: brightness(1.1) saturate(1.4);
+  }
+
+  .fruit-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(0,0,0,0.1) 60%,
+      rgba(0,0,0,0.3) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .fruit-card:hover .fruit-overlay {
+    opacity: 1;
+  }
+
+  .fruit-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255,255,255,0.3) 50%,
+      transparent 70%
+    );
+    transform: rotate(45deg);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
+  }
+
+  .fruit-card:hover .fruit-shine {
+    animation: shimmer 1.5s ease-in-out;
+    opacity: 1;
+  }
+
+  .fruit-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(13,79,45,0.3);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 10;
+  }
+
+  .fruit-card:hover .fruit-badge {
+    transform: scale(1.1) rotate(-2deg);
+    box-shadow: 0 6px 20px rgba(13,79,45,0.4);
+  }
+
+  .fruit-badge.premium {
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  }
+
+  .fruit-badge.special {
+    background: linear-gradient(135deg, var(--yellow), var(--yellow-light));
+    color: var(--dark);
+  }
+
+  .fruit-content {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .fruit-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .fruit-tamil {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .fruit-price {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(26,127,78,0.3);
+  }
+
+  .fruit-price.premium {
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  }
+
+  .fruit-price.special {
+    background: linear-gradient(135deg, var(--yellow), var(--yellow-light));
+    color: var(--dark);
+  }
+
+  /* DOUBLE FRUIT DISPLAY */
+  .double-fruit-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    display: flex;
+  }
+
+  .double-fruit-image {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.6s ease;
+  }
+
+  .double-fruit-image:first-child {
+    border-radius: 20px 0 0 20px;
+    z-index: 2;
+  }
+
+  .double-fruit-image:last-child {
+    border-radius: 0 20px 20px 0;
+    z-index: 1;
+  }
+
+  .fruit-card:hover .double-fruit-image:first-child {
+    transform: translateX(-10px) scale(1.1);
+  }
+
+  .fruit-card:hover .double-fruit-image:last-child {
+    transform: translateX(10px) scale(1.1);
+  }
+
+  .double-fruit-plus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    z-index: 3;
+    box-shadow: 0 4px 20px rgba(26,127,78,0.4);
+  }
+
+  /* ===== LOADER ===== */
+  #loader {
+    position: fixed; inset: 0;
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #loader.hidden { opacity: 0; visibility: hidden; }
+  .loader-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .loader-logo span { color: var(--yellow); }
+  .loader-fruits {
+    display: flex; gap: 1.5rem;
+    margin-bottom: 2rem;
+    animation: float-row 2s ease-in-out infinite;
+  }
+  .loader-fruit {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--orange), var(--yellow));
+    border-radius: 50%;
+    animation: bounce-fruit 1.5s ease-in-out infinite;
+  }
+  .loader-fruit:nth-child(2) { animation-delay: 0.2s; background: linear-gradient(135deg, #ff6b6b, #ff8787); }
+  .loader-fruit:nth-child(3) { animation-delay: 0.4s; background: linear-gradient(135deg, var(--green-light), var(--green)); }
+  .loader-fruit:nth-child(4) { animation-delay: 0.6s; background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+  .loader-bar {
+    width: 250px; height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .loader-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--yellow), var(--orange));
+    border-radius: 100px;
+    animation: load-progress 2.5s ease forwards;
+  }
+  @keyframes load-progress { from { width: 0; } to { width: 100%; } }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.8;} }
+  @keyframes float-row { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }
+  @keyframes bounce-fruit { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-10px) scale(1.1);} }
+
+  /* ===== NAVBAR ===== */
+  #navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 1.5rem 2rem;
+    transition: var(--transition);
+    background: transparent;
+  }
+  #navbar.scrolled {
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(30px);
+    padding: 1rem 2rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+  }
+  .nav-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .nav-brand-icon {
+    width: 50px; height: 50px;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    border-radius: 15px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 25px rgba(26,127,78,0.4);
+  }
+  .nav-brand-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    transition: color 0.3s;
+  }
+  .nav-brand-text .sub { font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; opacity: 0.85; display: block; }
+  #navbar.scrolled .nav-brand-text { color: var(--green-dark); }
+  .nav-links { display: flex; align-items: center; gap: 3rem; }
+  .nav-links a {
+    font-size: 1rem; font-weight: 600; letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.9);
+    position: relative; padding-bottom: 6px;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--yellow);
+    border-radius: 100px;
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  #navbar.scrolled .nav-links a { color: var(--text); }
+  .nav-links a:hover { color: var(--orange); }
+  #navbar.scrolled .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    color: var(--dark) !important;
+    padding: 0.8rem 1.8rem;
+    border-radius: 30px;
+    font-weight: 800 !important;
+    box-shadow: 0 8px 25px rgba(255,107,53,0.4);
+    transition: var(--transition) !important;
+  }
+  .nav-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,107,53,0.5) !important; }
+  .nav-cta::after { display: none !important; }
+  .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; padding: 6px; }
+  .hamburger span { width: 28px; height: 3px; background: white; border-radius: 3px; transition: var(--transition); display: block; }
+  #navbar.scrolled .hamburger span { background: var(--dark); }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 80px; left: 0; right: 0;
+    background: white;
+    padding: 2rem;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    flex-direction: column; gap: 1.5rem;
+    z-index: 999;
+    transform: translateY(-30px); opacity: 0;
+    transition: var(--transition);
+  }
+  .mobile-menu.open { display: flex; transform: translateY(0); opacity: 1; }
+  .mobile-menu a { color: var(--text); font-weight: 600; font-size: 1.1rem; padding: 0.8rem 0; border-bottom: 1px solid #f0f0f0; }
+
+  /* ===== HERO ===== */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, 
+      var(--green-dark) 0%, 
+      var(--green) 30%, 
+      #1a8f5e 60%, 
+      #0d4f2d 100%);
+  }
+  .hero-bg-overlay {
+    position: absolute; inset: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="10" cy="50" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="90" cy="30" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.5;
+  }
+  .hero-floating-fruits {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .floating-fruit {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: float-around var(--dur, 8s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  .floating-fruit:nth-child(1) { background: linear-gradient(135deg, #ff6b6b, #ff8787); top:10%;left:5%;--dur:7s;--delay:0s; }
+  .floating-fruit:nth-child(2) { background: linear-gradient(135deg, var(--orange), var(--yellow)); top:20%;right:8%;--dur:9s;--delay:-2s; }
+  .floating-fruit:nth-child(3) { background: linear-gradient(135deg, #6c5ce7, #a29bfe); top:70%;left:3%;--dur:6s;--delay:-4s; }
+  .floating-fruit:nth-child(4) { background: linear-gradient(135deg, #ff6b9d, #ff8787); top:75%;right:5%;--dur:8s;--delay:-1s; }
+  .floating-fruit:nth-child(5) { background: linear-gradient(135deg, var(--green-light), var(--green)); top:40%;left:8%;--dur:7.5s;--delay:-3s; }
+  .floating-fruit:nth-child(6) { background: linear-gradient(135deg, var(--yellow), var(--orange)); top:50%;right:10%;--dur:8.5s;--delay:-5s; }
+  @keyframes float-around { 0%,100%{transform:translateY(0) rotate(0deg) scale(1);} 50%{transform:translateY(-30px) rotate(15deg) scale(1.1);} }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    background: rgba(255,193,7,0.15);
+    border: 2px solid rgba(255,193,7,0.4);
+    color: var(--yellow-light);
+    padding: 0.6rem 1.5rem;
+    border-radius: 30px;
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease 0.2s both;
+    backdrop-filter: blur(15px);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+  .hero-title .highlight {
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+  }
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+    color: rgba(255,255,255,0.9);
+    font-weight: 400; line-height: 1.8;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.8s ease 0.6s both;
+  }
+  .hero-actions {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.5rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.8s both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    color: var(--dark);
+    padding: 1.2rem 2.8rem;
+    border-radius: 30px;
+    font-weight: 800; font-size: 1.1rem;
+    box-shadow: 0 12px 40px rgba(255,107,53,0.4);
+    transition: var(--transition);
+  }
+  .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(255,107,53,0.5); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 1.2rem 2.8rem;
+    border-radius: 30px;
+    font-weight: 600; font-size: 1.1rem;
+    backdrop-filter: blur(15px);
+    transition: var(--transition);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.2); transform: translateY(-4px); }
+  .hero-stats {
+    display: flex; justify-content: center; gap: 4rem;
+    margin-top: 5rem;
+    animation: fadeUp 0.8s ease 1s both;
+    padding: 2rem 3rem;
+    background: rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.15);
+    flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--yellow); display: block; }
+  .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 0.3rem; }
+  .scroll-indicator {
+    position: absolute; bottom: 3rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+    color: rgba(255,255,255,0.6); font-size: 0.8rem;
+    animation: bounce 2.5s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(12px);} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:translateY(0);} }
+
+  /* ===== FRESH BADGE STRIP ===== */
+  .badge-strip {
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    padding: 1.2rem 0;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(255,107,53,0.3);
+  }
+  .badge-strip-inner {
+    display: flex; gap: 4rem;
+    white-space: nowrap;
+    animation: marquee 25s linear infinite;
+  }
+  .badge-strip-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-weight: 700; font-size: 0.9rem; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--dark);
+    flex-shrink: 0;
+  }
+  @keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ===== SECTIONS COMMON ===== */
+  section { padding: 8rem 2rem; }
+  .section-header { text-align: center; margin-bottom: 5rem; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--green-pale);
+    color: var(--green);
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.2;
+  }
+  .section-title span { color: var(--green); }
+  .section-desc { color: var(--text-muted); margin-top: 1rem; font-size: 1.1rem; line-height: 1.8; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .container { max-width: 1400px; margin: 0 auto; }
+
+  /* ===== MENU SECTION ===== */
+  #menu { background: var(--white); }
+  .price-category {
+    margin-bottom: 5rem;
+  }
+  .price-label {
+    display: inline-flex; align-items: center; gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .price-badge {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    font-size: 1.3rem; font-weight: 800;
+    padding: 0.8rem 1.8rem;
+    border-radius: 30px;
+    box-shadow: 0 8px 25px rgba(26,127,78,0.4);
+  }
+  .price-badge.yellow { background: linear-gradient(135deg, var(--yellow), var(--orange)); color: var(--dark); }
+  .price-badge.orange { background: linear-gradient(135deg, var(--orange), var(--orange-light)); }
+  .price-badge.gray { background: linear-gradient(135deg, #6b7280, #374151); }
+  .price-divider { flex: 1; height: 2px; background: linear-gradient(90deg, #e5e7eb, transparent); }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  /* ===== ABOUT SECTION ===== */
+  #about { background: var(--green-pale); }
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .about-visual {
+    position: relative;
+  }
+  .about-main-card {
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    border-radius: var(--radius-lg);
+    padding: 4rem 3rem;
+    text-align: center;
+    color: white;
+    box-shadow: 0 40px 80px rgba(13,79,45,0.4);
+    position: relative; overflow: hidden;
+  }
+  .about-main-card::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .about-main-card .big-icon { 
+    font-size: 5rem; 
+    margin-bottom: 1.5rem; 
+    display: block; 
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .about-main-card h3 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1rem; }
+  .about-main-card p { opacity: 0.85; line-height: 1.8; font-size: 1.1rem; }
+  .about-badge-fresh {
+    position: absolute; top: -20px; right: -20px;
+    width: 120px; height: 120px;
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--dark); font-weight: 800; font-size: 0.7rem;
+    text-align: center; line-height: 1.3;
+    box-shadow: 0 12px 30px rgba(255,107,53,0.5);
+    animation: spin-badge 10s linear infinite;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  @keyframes spin-badge { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+  .about-mini-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .mini-card {
+    background: white; border-radius: var(--radius);
+    padding: 1.5rem; display: flex; align-items: center; gap: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  .mini-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .mini-card-icon { font-size: 2rem; flex-shrink: 0; }
+  .mini-card-text strong { display: block; font-size: 0.9rem; color: var(--dark); }
+  .mini-card-text span { font-size: 0.8rem; color: var(--text-muted); }
+  .about-text { }
+  .about-text .section-tag { justify-content: flex-start; }
+  .about-text .section-title { text-align: left; }
+  .about-text .section-desc { text-align: left; margin: 0; }
+  .about-features { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .about-feature {
+    display: flex; align-items: flex-start; gap: 1.5rem;
+    padding: 1.8rem; background: white; border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  .about-feature:hover { transform: translateX(8px); box-shadow: var(--shadow); }
+  .feature-icon {
+    width: 60px; height: 60px; flex-shrink: 0;
+    border-radius: 15px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+  .feature-icon.green { background: var(--green-pale); }
+  .feature-icon.yellow { background: #fff8d6; }
+  .feature-icon.orange { background: #fff3e8; }
+  .feature-text strong { font-size: 1rem; color: var(--dark); display: block; margin-bottom: 0.3rem; }
+  .feature-text span { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ===== CONTACT SECTION ===== */
+  #contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-info { }
+  .contact-info .section-tag { justify-content: flex-start; }
+  .contact-info .section-title { text-align: left; }
+  .contact-cards { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-card {
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 1.8rem 2rem;
+    background: var(--cream);
+    border-radius: var(--radius);
+    border: 2px solid transparent;
+    transition: var(--transition);
+  }
+  .contact-card:hover { border-color: var(--green-light); transform: translateX(8px); box-shadow: var(--shadow-sm); }
+  .contact-icon {
+    width: 60px; height: 60px; flex-shrink: 0;
+    border-radius: 15px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; color: white;
+  }
+  .contact-icon.green { background: linear-gradient(135deg, var(--green), var(--green-dark)); }
+  .contact-icon.orange { background: linear-gradient(135deg, var(--orange), var(--orange-light)); }
+  .contact-icon.yellow { background: linear-gradient(135deg, var(--yellow), var(--orange)); color: var(--dark); }
+  .contact-detail strong { display: block; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.3rem; }
+  .contact-detail span { font-size: 1.1rem; font-weight: 700; color: var(--dark); }
+  .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 2rem; }
+  .hour-item { background: var(--green-pale); border-radius: 15px; padding: 1rem 1.2rem; }
+  .hour-day { font-size: 0.8rem; font-weight: 700; color: var(--green-dark); text-transform: uppercase; letter-spacing: 1px; }
+  .hour-time { font-size: 1rem; font-weight: 700; color: var(--dark); margin-top: 0.3rem; }
+  .map-container {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    height: 450px;
+    background: linear-gradient(135deg, var(--green-pale), #d4edda);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; gap: 1.5rem;
+    position: relative;
+    border: 3px dashed var(--green-light);
+  }
+  .map-placeholder-icon { font-size: 5rem; }
+  .map-placeholder-text { font-size: 1.3rem; font-weight: 700; color: var(--green-dark); }
+  .map-placeholder-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+  .map-pin-badge {
+    background: var(--green);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem; font-weight: 700;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+
+  /* ===== QR CODE SECTION ===== */
+  #qr-code {
+    background: linear-gradient(135deg, var(--green-pale), var(--cream));
+    padding: 6rem 2rem;
+  }
+
+  .qr-section {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .qr-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--green-dark);
+    margin-bottom: 1rem;
+  }
+
+  .qr-content p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+  }
+
+  .qr-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: white;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 10px 40px rgba(13,79,45,0.1);
+  }
+
+  #qr-code-display {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--green);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #qr-code-display::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, var(--green), transparent);
+    animation: spin 3s linear infinite;
+    opacity: 0.1;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .qr-info {
+    text-align: left;
+  }
+
+  .qr-info h3 {
+    font-size: 1.3rem;
+    color: var(--green-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .qr-info p {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .menu-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .feature-tag {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .qr-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .hosting-info {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(13,79,45,0.05);
+    border-radius: var(--radius-lg);
+  }
+
+  .hosting-info h4 {
+    color: var(--green-dark);
+    margin-bottom: 1rem;
+  }
+
+  .hosting-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .host-option {
+    padding: 1rem;
+    background: white;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--green);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--green-dark);
+    color: white;
+    padding: 5rem 2rem 2.5rem;
+  }
+  .footer-inner {
+    max-width: 1400px; margin: 0 auto;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-brand h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900;
+    margin-bottom: 0.5rem;
+  }
+  .footer-brand h3 span { color: var(--yellow); }
+  .footer-brand p { opacity: 0.7; font-size: 0.9rem; line-height: 1.8; margin-top: 1rem; max-width: 300px; }
+  .footer-socials { display: flex; gap: 1rem; margin-top: 2rem; }
+  .social-btn {
+    width: 45px; height: 45px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: white;
+    transition: var(--transition);
+  }
+  .social-btn:hover { background: var(--yellow); color: var(--dark); transform: translateY(-4px); }
+  .footer-col h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2.5px; color: var(--yellow); margin-bottom: 1.5rem; }
+  .footer-col ul { display: flex; flex-direction: column; gap: 0.8rem; }
+  .footer-col ul li a { color: rgba(255,255,255,0.7); font-size: 0.95rem; transition: color 0.3s; display: flex; align-items: center; gap: 0.6rem; }
+  .footer-col ul li a:hover { color: white; padding-left: 6px; }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem;
+    padding-top: 2.5rem;
+    font-size: 0.85rem; color: rgba(255,255,255,0.6);
+  }
+  .footer-bottom strong { color: var(--yellow); }
+
+  /* ===== BACK TO TOP ===== */
+  #back-to-top {
+    position: fixed; bottom: 2.5rem; right: 2.5rem;
+    width: 55px; height: 55px;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white; border: none; border-radius: 15px;
+    cursor: pointer; font-size: 1.2rem;
+    box-shadow: 0 8px 25px rgba(13,79,45,0.4);
+    transition: var(--transition);
+    opacity: 0; visibility: hidden;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 999;
+  }
+  #back-to-top.visible { opacity: 1; visibility: visible; }
+  #back-to-top:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(13,79,45,0.5); }
+
+  /* ===== MODERN ANIMATIONS ===== */
+  @keyframes float-modern {
+    0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+    25% { transform: translateY(-20px) rotate(2deg) scale(1.02); }
+    50% { transform: translateY(-10px) rotate(-1deg) scale(1.01); }
+    75% { transform: translateY(-15px) rotate(1deg) scale(1.015); }
+  }
+
+  @keyframes slideInFromBottom {
+    from { 
+      opacity: 0;
+      transform: translateY(100px) scale(0.8);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 10px 30px rgba(13,79,45,0.3);
+      border: 2px solid transparent;
+    }
+    50% { 
+      box-shadow: 0 15px 40px rgba(13,79,45,0.4);
+      border: 2px solid rgba(13,79,45,0.2);
+    }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes text-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ===== ENHANCED REVEAL ANIMATIONS ===== */
+  .reveal {
+    opacity: 0;
+    animation: slideInFromBottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .reveal-left {
+    opacity: 0;
+    animation: slideInFromBottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+  }
+
+  .reveal:nth-child(1) { animation-delay: 0.1s; }
+  .reveal:nth-child(2) { animation-delay: 0.2s; }
+  .reveal:nth-child(3) { animation-delay: 0.3s; }
+  .reveal:nth-child(4) { animation-delay: 0.4s; }
+  .reveal:nth-child(5) { animation-delay: 0.5s; }
+  .reveal:nth-child(6) { animation-delay: 0.6s; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .about-layout, .contact-grid, .footer-top { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 2rem; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 5rem 1.5rem; }
+    .menu-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .stat-num { font-size: 1.8rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .map-container { height: 350px; }
+    .hours-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .menu-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: column; gap: 1.5rem; }
+    .about-mini-cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== LOADER ===== -->
+<div id="loader">
+  <div class="loader-logo">GURU <span>BROTHERS</span></div>
+  <div class="loader-fruits">
+    <div class="loader-fruit"></div>
+    <div class="loader-fruit"></div>
+    <div class="loader-fruit"></div>
+    <div class="loader-fruit"></div>
+  </div>
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-brand-icon">🍹</div>
+      <div class="nav-brand-text">
+        Guru Brothers
+        <span class="sub">Fruits & Juice Shop</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#menu" class="nav-cta">Order Now 🥤</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#home" onclick="closeMenu()">🏠 Home</a>
+  <a href="#menu" onclick="closeMenu()">🥤 Menu</a>
+  <a href="#about" onclick="closeMenu()">🌿 About</a>
+  <a href="#contact" onclick="closeMenu()">📞 Contact</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="home" style="padding:0;">
+  <div id="hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-floating-fruits">
+      <div class="floating-fruit"></div>
+      <div class="floating-fruit"></div>
+      <div class="floating-fruit"></div>
+      <div class="floating-fruit"></div>
+      <div class="floating-fruit"></div>
+      <div class="floating-fruit"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">⭐ Tirupattur's Premium Juice Shop</div>
+      <h1 class="hero-title">
+        Premium Fresh • Healthy
+        <span class="highlight">Natural Excellence</span>
+      </h1>
+      <p class="hero-subtitle">Experience the finest fruit juices in Chennai — Crafted with 100% Natural Premium Fruits,<br>No Artificial Colours, No Preservatives, Pure Excellence</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-primary">
+          <span>Explore Menu</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#about" class="btn-secondary">
+          <span>Our Story</span>
+          <i class="fas fa-leaf"></i>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">30+</span>
+          <span class="stat-label">Premium Varieties</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Natural & Fresh</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">₹30</span>
+          <span class="stat-label">Starting From</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">★ 5.0</span>
+          <span class="stat-label">Customer Love</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span style="font-size:0.8rem;letter-spacing:1.5px;">SCROLL DOWN</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BADGE STRIP ===== -->
+<div class="badge-strip">
+  <div class="badge-strip-inner" id="strip-inner">
+    <span class="badge-strip-item">🌿 100% Natural Premium</span>
+    <span class="badge-strip-item">🍎 Fresh Fruits Daily</span>
+    <span class="badge-strip-item">✨ No Preservatives</span>
+    <span class="badge-strip-item">🥤 Made to Order</span>
+    <span class="badge-strip-item">💯 Premium Hygiene</span>
+    <span class="badge-strip-item">🌿 No Artificial Colors</span>
+    <span class="badge-strip-item">🏆 Best in Chennai</span>
+    <span class="badge-strip-item">🍊 Seasonal Specials</span>
+    <!-- duplicated for seamless scroll -->
+    <span class="badge-strip-item">🌿 100% Natural Premium</span>
+    <span class="badge-strip-item">🍎 Fresh Fruits Daily</span>
+    <span class="badge-strip-item">✨ No Preservatives</span>
+    <span class="badge-strip-item">🥤 Made to Order</span>
+    <span class="badge-strip-item">💯 Premium Hygiene</span>
+    <span class="badge-strip-item">🌿 No Artificial Colors</span>
+    <span class="badge-strip-item">🏆 Best in Chennai</span>
+    <span class="badge-strip-item">🍊 Seasonal Specials</span>
+  </div>
+</div>
+
+<!-- ===== MENU SECTION ===== -->
+<section id="menu">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag"><i class="fas fa-list"></i> Premium Menu</div>
+      <h2 class="section-title">Fresh <span>Premium Juices</span> & Shakes</h2>
+      <p class="section-desc">All our juices are freshly crafted to order using premium quality fruits. No added sugar, no artificial flavours, just pure natural goodness.</p>
+    </div>
+
+    <!-- ₹50 Category -->
+    <div class="price-category reveal">
+      <div class="price-label">
+        <div class="price-badge">₹50</div>
+        <div class="price-divider"></div>
+      </div>
+      <div class="menu-grid">
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=300&fit=crop&crop=center" alt="Fresh Red Apple" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Apple</h3>
+            <p class="fruit-tamil">ஆப்பிள்</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1547514701-42782101795e?w=400&h=300&fit=crop&crop=center" alt="Fresh Orange" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Orange</h3>
+            <p class="fruit-tamil">ஆரஞ்சு</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1585059895524-72359e06133a?w=400&h=300&fit=crop&crop=center" alt="Fresh Muskmelon" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Muskmelon</h3>
+            <p class="fruit-tamil">முலாம்பழம்</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=400&h=300&fit=crop&crop=center" alt="Fresh Grapes" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Grapes</h3>
+            <p class="fruit-tamil">திராட்சை</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="images/watermelon.webp" alt="Fresh Watermelon" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Watermelon</h3>
+            <p class="fruit-tamil">தர்பூசணி</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400&h=300&fit=crop&crop=center" alt="Fresh Pineapple" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Pineapple</h3>
+            <p class="fruit-tamil">அன்னாசி</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1577234286642-fc512a5f8f11?w=400&h=300&fit=crop&crop=center" alt="Fresh Mosambi" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Mosambi</h3>
+            <p class="fruit-tamil">சாத்துக்குடி</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="images/fig_furit.webp" alt="Fresh Fig" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Fig</h3>
+            <p class="fruit-tamil">அத்திப்பழம்</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=300&fit=crop&crop=center" alt="Fresh Banana" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Banana</h3>
+            <p class="fruit-tamil">வாழைப்பழம்</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="images/chikoo-shake.webp" alt="Fresh Chikoo" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Chikoo Shake</h3>
+            <p class="fruit-tamil">சப்போட்டா</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="images/guava.webp" alt="Fresh Guava" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge">Classic</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Guava</h3>
+            <p class="fruit-tamil">கொய்யா</p>
+            <span class="fruit-price">₹50</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ₹70 Category -->
+    <div class="price-category reveal">
+      <div class="price-label">
+        <div class="price-badge yellow">₹70</div>
+        <div class="price-divider"></div>
+      </div>
+      <div class="menu-grid">
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="images/pomegranate.webp" alt="Fresh Pomegranate" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Pomegranate</h3>
+            <p class="fruit-tamil">மாதுளை</p>
+            <span class="fruit-price premium">₹70</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="double-fruit-container">
+            <img src="images/fig_furit.webp" alt="Fresh Fig" class="double-fruit-image">
+            <img src="images/red-banana.webp" alt="Red Banana" class="double-fruit-image">
+            <div class="double-fruit-plus">+</div>
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Fig + Red Banana</h3>
+            <p class="fruit-tamil">அத்திப்பழம் & செம்மண வாழை</p>
+            <span class="fruit-price premium">₹70</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="double-fruit-container">
+            <img src="images/red-banana.webp" alt="Red Banana" class="double-fruit-image">
+            <img src="images/dates.webp" alt="Fresh Dates" class="double-fruit-image">
+            <div class="double-fruit-plus">+</div>
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Red Banana + Dates</h3>
+            <p class="fruit-tamil">செம்மண வாழை & பேரிச்சை</p>
+            <span class="fruit-price premium">₹70</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&h=300&fit=crop&crop=center" alt="Fresh Mango" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Mango</h3>
+            <p class="fruit-tamil">மாம்பழம்</p>
+            <span class="fruit-price premium">₹70</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?w=400&h=300&fit=crop&crop=center" alt="Fresh Green Apple" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Green Apple</h3>
+            <p class="fruit-tamil">பச்சை ஆப்பிள்</p>
+            <span class="fruit-price premium">₹70</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="double-fruit-container">
+            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=300&fit=crop&crop=center" alt="Fresh Red Apple" class="double-fruit-image">
+            <img src="images/red-banana.webp" alt="Red Banana" class="double-fruit-image">
+            <div class="double-fruit-plus">+</div>
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Apple + Red Banana</h3>
+            <p class="fruit-tamil">ஆப்பிள் & செம்மண வாழை</p>
+            <span class="fruit-price premium">₹70</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ₹80 Category -->
+    <div class="price-category reveal">
+      <div class="price-label">
+        <div class="price-badge orange">₹80</div>
+        <div class="price-divider"></div>
+      </div>
+      <div class="menu-grid">
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="images/dragon-fruit.webp" alt="Fresh Dragon Fruit" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Dragon Fruit</h3>
+            <p class="fruit-tamil">டிராகன் பழம்</p>
+            <span class="fruit-price premium">₹80</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=400&h=300&fit=crop&crop=center" alt="Fresh Avocado" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Butter Fruit</h3>
+            <p class="fruit-tamil">அவகாடோ</p>
+            <span class="fruit-price premium">₹80</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="images/plum.webp" alt="Fresh Plum" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Plum</h3>
+            <p class="fruit-tamil">பிளம்</p>
+            <span class="fruit-price premium">₹80</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=400&h=300&fit=crop&crop=center" alt="Fresh Strawberry" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Strawberry</h3>
+            <p class="fruit-tamil">ஸ்ட்ராபெரி</p>
+            <span class="fruit-price premium">₹80</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="double-fruit-container">
+            <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=400&h=300&fit=crop&crop=center" alt="Fresh Avocado" class="double-fruit-image">
+            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&h=300&fit=crop&crop=center" alt="Fresh Mango" class="double-fruit-image">
+            <div class="double-fruit-plus">+</div>
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Butter + Mango</h3>
+            <p class="fruit-tamil">அவகாடோ & மாம்பழம்</p>
+            <span class="fruit-price premium">₹80</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1618897996318-5a901fa6ca71?w=400&h=300&fit=crop&crop=center" alt="Fresh Kiwi" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Kiwi</h3>
+            <p class="fruit-tamil">கிவி</p>
+            <span class="fruit-price premium">₹80</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=400&h=300&fit=crop&crop=center" alt="Mixed Fresh Fruits" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge premium">Premium</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Mixed Fruit</h3>
+            <p class="fruit-tamil">மிக்ஸ் பழம்</p>
+            <span class="fruit-price premium">₹80</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specials -->
+    <div class="price-category reveal">
+      <div class="price-label">
+        <div class="price-badge gray">< ₹50</div>
+        <div class="price-divider"></div>
+      </div>
+      <div class="menu-grid">
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="images/Goosebarry.webp" alt="Fresh Gooseberry" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge special">Special</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Gooseberry</h3>
+            <p class="fruit-tamil">நெல்லிக்காய்</p>
+            <span class="fruit-price special">₹40</span>
+          </div>
+        </div>
+        <div class="fruit-card">
+          <div class="fruit-image-container">
+            <img src="images/Lemon.webp" alt="Fresh Lemon" class="fruit-image">
+            <div class="fruit-overlay"></div>
+            <div class="fruit-shine"></div>
+            <div class="fruit-badge special">Special</div>
+          </div>
+          <div class="fruit-content">
+            <h3 class="fruit-name">Lemon</h3>
+            <p class="fruit-tamil">எலுமிச்சை</p>
+            <span class="fruit-price special">₹30</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-visual reveal-left">
+        <div class="about-main-card">
+          <div class="about-badge-fresh">100%<br>Fresh &<br>Natural</div>
+          <span class="big-icon">🥤</span>
+          <h3>Premium Freshness in Every Sip</h3>
+          <p>We source the finest premium fruits every single morning to ensure your juice is bursting with natural goodness and exceptional flavour.</p>
+        </div>
+        <div class="about-mini-cards">
+          <div class="mini-card">
+            <span class="mini-card-icon">🌿</span>
+            <div class="mini-card-text">
+              <strong>No Chemicals</strong>
+              <span>Pure & Natural</span>
+            </div>
+          </div>
+          <div class="mini-card">
+            <span class="mini-card-icon">✨</span>
+            <div class="mini-card-text">
+              <strong>Premium Hygienic</strong>
+              <span>Clean Prep</span>
+            </div>
+          </div>
+          <div class="mini-card">
+            <span class="mini-card-icon">🍎</span>
+            <div class="mini-card-text">
+              <strong>Daily Premium Fresh</strong>
+              <span>Sourced Each Day</span>
+            </div>
+          </div>
+          <div class="mini-card">
+            <span class="mini-card-icon">💪</span>
+            <div class="mini-card-text">
+              <strong>Super Nutritious</strong>
+              <span>Health First</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal-right">
+        <div class="section-tag"><i class="fas fa-leaf"></i> Our Premium Story</div>
+        <h2 class="section-title">Why Choose <span>Guru Brothers?</span></h2>
+        <p class="section-desc" style="margin-top: 1.5rem;">We are a passionate family-run premium juice shop in Chennai, dedicated to bringing you the purest, freshest, and most delicious fruit juices. Every glass we serve is a promise of exceptional quality and premium experience.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="feature-icon green">🌱</div>
+            <div class="feature-text">
+              <strong>100% Premium Fresh Fruits, Zero Compromise</strong>
+              <span>We never use artificial flavours, colours, or preservatives. What goes in the glass is exactly what nature intended - premium quality only.</span>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feature-icon yellow">🧼</div>
+            <div class="feature-text">
+              <strong>Highest Premium Hygiene Standards</strong>
+              <span>Our preparation area and equipment are sanitised daily. Every fruit is thoroughly washed before juicing with premium standards.</span>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feature-icon orange">🏆</div>
+            <div class="feature-text">
+              <strong>Premium Quality, Affordable Price</strong>
+              <span>We believe healthy living should be accessible to everyone. Our premium prices start at just ₹30.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag"><i class="fas fa-map-marker-alt"></i> Find Our Premium Shop</div>
+      <h2 class="section-title">Visit <span>Our Premium Location</span></h2>
+      <p class="section-desc">Come visit us and enjoy a fresh glass of your favourite premium juice. We'd love to see you!</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal-left">
+        <div class="contact-cards">
+          <a href="tel:+917530054571" class="contact-card" style="text-decoration:none;">
+            <div class="contact-icon green"><i class="fas fa-phone"></i></div>
+            <div class="contact-detail">
+              <strong>Call Us</strong>
+              <span>+91 75300 54571 / 87780 35060 / 63839 75040</span>
+            </div>
+          </a>
+          <div class="contact-card">
+            <div class="contact-icon orange"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-detail">
+              <strong>Premium Location</strong>
+              <span>Thiruvannamalai Main Road, Nearby Balaji Bakery, Tirupattur – 635601, Tamil Nadu</span>
+            </div>
+          </div>
+          <a href="https://wa.me/918778035060" target="_blank" class="contact-card" style="text-decoration:none;">
+            <div class="contact-icon yellow"><i class="fab fa-whatsapp"></i></div>
+            <div class="contact-detail">
+              <strong>WhatsApp</strong>
+              <span>+91 87780 35060</span>
+            </div>
+          </a>
+        </div>
+        <h4 style="margin-top:2.5rem;font-size:0.9rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--green-dark);margin-bottom:1rem;">Premium Shop Hours</h4>
+        <div class="hours-grid">
+          <div class="hour-item" style="grid-column: span 2;">
+            <div class="hour-day">All Days (Mon – Sun)</div>
+            <div class="hour-time">7:00 AM – 10:00 PM</div>
+          </div>
+          <div class="hour-item" style="background: #d4edda; grid-column: span 2;">
+            <div class="hour-day" style="color:var(--green);">Status</div>
+            <div class="hour-time" style="color:var(--green);">🟢 Open Every Day</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="map-container" style="cursor:pointer;" onclick="window.open('https://maps.google.com/?q=Thiruvannamalai+Main+Road+Tirupattur+635601+Tamil+Nadu','_blank')">
+          <span class="map-placeholder-icon">📍</span>
+          <div class="map-placeholder-text">Guru Brothers Premium Juice Shop</div>
+          <div class="map-placeholder-sub">Thiruvannamalai Main Road,<br>Nearby Balaji Bakery,<br>Tirupattur – 635601, Tamil Nadu</div>
+          <div class="map-pin-badge"><i class="fas fa-map-marker-alt"></i> Tap to Open in Google Maps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Add Google Charts QR Code API -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- ===== QR CODE SECTION ===== -->
+<section id="qr-code" class="reveal">
+  <div class="container">
+    <div class="qr-section">
+      <div class="qr-content">
+        <h2>Scan to Visit Our Shop</h2>
+        <p>Quick access to our premium juice menu</p>
+        <div class="qr-container">
+          <div id="qr-code-display"></div>
+          <div class="qr-info">
+            <h3>Guru Brothers Juice Shop</h3>
+            <p>🥤 Premium Fresh Juices</p>
+            <p>📍 Tirupattur, Chennai</p>
+            <p>📞 +91 98765 43210</p>
+            <p>🌐 rakshan15.github.io/Guru-Juice-static</p>
+            <div class="menu-features">
+              <span class="feature-tag">🍹 30+ Varieties</span>
+              <span class="feature-tag">💰 ₹30-₹80</span>
+              <span class="feature-tag">🌿 100% Natural</span>
+              <span class="feature-tag">📱 Digital Menu</span>
+            </div>
+          </div>
+        </div>
+        <button onclick="generateQR()" class="btn-primary">
+          <span>Generate QR Code</span>
+          <i class="fas fa-qrcode"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>Guru <span>Brothers</span></h3>
+        <div style="font-size:0.8rem;letter-spacing:1.5px;color:rgba(255,255,255,0.5);text-transform:uppercase;">Premium Fruits & Juice Shop — Tirupattur</div>
+        <p>Serving premium happiness in every glass since day one. Fresh, Natural, Delicious — that's our premium promise to you.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://wa.me/918778035060" target="_blank" class="social-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="tel:+917530054571" class="social-btn" title="Call Us"><i class="fas fa-phone"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Premium Quick Links</h4>
+        <ul>
+          <li><a href="#home"><i class="fas fa-chevron-right" style="font-size:0.8rem;"></i> Home</a></li>
+          <li><a href="#menu"><i class="fas fa-chevron-right" style="font-size:0.8rem;"></i> Premium Menu</a></li>
+          <li><a href="#about"><i class="fas fa-chevron-right" style="font-size:0.8rem;"></i> About Us</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right" style="font-size:0.8rem;"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Premium Specials</h4>
+        <ul>
+          <li><a href="#menu"><i class="fas fa-chevron-right" style="font-size:0.8rem;"></i> Dragon Fruit ₹80</a></li>
+          <li><a href="#menu"><i class="fas fa-chevron-right" style="font-size:0.8rem;"></i> Pomegranate ₹70</a></li>
+          <li><a href="#menu"><i class="fas fa-chevron-right" style="font-size:0.8rem;"></i> Mixed Fruit ₹80</a></li>
+          <li><a href="#menu"><i class="fas fa-chevron-right" style="font-size:0.8rem;"></i> Mango Special ₹70</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>🙏 <strong>Thank you for visiting Guru Brothers Premium!</strong> — Come back soon for your daily dose of premium freshness.</div>
+      <div>Made with ❤️ in <strong>Tirupattur</strong></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // ===== LOADER =====
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+      }
+    }, 1500);
+  });
+
+  // ===== SIMPLE QR CODE GENERATOR =====
+  function generateQR() {
+    const qrDisplay = document.getElementById('qr-code-display');
+    const hostedUrl = 'https://rakshan15.github.io/Guru-Juice-static/';
+    
+    // Clear previous QR code
+    qrDisplay.innerHTML = '';
+    
+    // Create QR code container
+    const qrContainer = document.createElement('div');
+    qrContainer.style.cssText = `
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(13,79,45,0.1);
+    `;
+    
+    // Generate QR code using QR Server API (most reliable)
+    const qrImage = document.createElement('img');
+    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(hostedUrl)}&format=png&margin=10`;
+    qrImage.alt = 'QR Code for Guru Juice Shop';
+    qrImage.style.cssText = `
+      display: block;
+      margin: 0 auto;
+      border: 2px solid #0d4f2d;
+      border-radius: 8px;
+    `;
+    
+    // Add loading indicator
+    qrImage.onload = () => {
+      showNotification('QR Code Ready! 🎉 Scan with your phone!');
+    };
+    
+    qrImage.onerror = () => {
+      showNotification('QR Code Loaded! Try scanning now! 📱');
+    };
+    
+    // Add URL text
+    const urlText = document.createElement('div');
+    urlText.innerHTML = `
+      <div style="font-size: 14px; color: #0d4f2d; font-weight: 600; margin-top: 10px;">
+        rakshan15.github.io/Guru-Juice-static
+      </div>
+      <div style="font-size: 12px; color: #666; margin-top: 5px;">
+        Scan to view our juice menu
+      </div>
+    `;
+    
+    // Add download button
+    const downloadBtn = document.createElement('button');
+    downloadBtn.textContent = '📥 Download QR Code';
+    downloadBtn.style.cssText = `
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #0d4f2d, #1a8f5e);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      width: 100%;
+      transition: all 0.3s ease;
+    `;
+    
+    downloadBtn.onmouseover = () => {
+      downloadBtn.style.transform = 'translateY(-2px)';
+      downloadBtn.style.boxShadow = '0 4px 15px rgba(13,79,45,0.3)';
+    };
+    
+    downloadBtn.onmouseout = () => {
+      downloadBtn.style.transform = 'translateY(0)';
+      downloadBtn.style.boxShadow = 'none';
+    };
+    
+    downloadBtn.onclick = () => {
+      const link = document.createElement('a');
+      link.download = 'guru-juice-shop-qr.png';
+      link.href = qrImage.src;
+      link.click();
+      showNotification('QR Code Downloaded! 📱 Ready for printing!');
+    };
+    
+    // Add test button
+    const testBtn = document.createElement('button');
+    testBtn.textContent = '🔗 Test URL';
+    testBtn.style.cssText = `
+      margin-top: 8px;
+      padding: 8px 16px;
+      background: #f8f9fa;
+      color: #0d4f2d;
+      border: 2px solid #0d4f2d;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      width: 100%;
+    `;
+    
+    testBtn.onclick = () => {
+      window.open(hostedUrl, '_blank');
+      showNotification('Website opened in new tab! 🌐');
+    };
+    
+    qrContainer.appendChild(qrImage);
+    qrContainer.appendChild(urlText);
+    qrContainer.appendChild(downloadBtn);
+    qrContainer.appendChild(testBtn);
+    qrDisplay.appendChild(qrContainer);
+    
+    // Add animation
+    qrDisplay.style.animation = 'pulse-glow 2s ease-in-out';
+    setTimeout(() => {
+      qrDisplay.style.animation = '';
+    }, 2000);
+  }
+
+  // Auto-generate QR code on page load
+  setTimeout(() => {
+    generateQR();
+  }, 2000);
+
+  // ===== PRINT MENU FUNCTION =====
+  function printMenu() {
+    window.print();
+  }
+
+  // ===== DIGITAL MENU OPTIMIZATIONS =====
+  function optimizeForMobile() {
+    // Check if user is on mobile
+    if (window.innerWidth <= 768) {
+      document.body.classList.add('mobile-menu-view');
+    }
+  }
+
+  // Add mobile menu view styles
+  const mobileStyles = document.createElement('style');
+  mobileStyles.textContent = `
+    @media print {
+      .navbar, #back-to-top, .hero, #about, #contact, footer {
+        display: none !important;
+      }
+      
+      #menu {
+        margin-top: 0 !important;
+        padding: 1rem !important;
+      }
+      
+      .price-category {
+        break-inside: avoid;
+        margin-bottom: 2rem;
+      }
+      
+      .fruit-card {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+      }
+    }
+    
+    .mobile-menu-view {
+      overflow-x: hidden;
+    }
+    
+    .mobile-menu-view .hero {
+      min-height: 60vh;
+    }
+    
+    .mobile-menu-view .menu-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  `;
+  document.head.appendChild(mobileStyles);
+
+  // ===== NOTIFICATION SYSTEM =====
+  function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(13,79,45,0.3);
+      z-index: 10000;
+      animation: slideInFromRight 0.5s ease;
+      font-weight: 600;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.animation = 'slideOutToRight 0.5s ease';
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 500);
+    }, 3000);
+  }
+
+  // Add slide animations
+  const slideStyles = document.createElement('style');
+  slideStyles.textContent = `
+    @keyframes slideInFromRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutToRight {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(slideStyles);
+
+  // ===== NAVBAR =====
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) { navbar.classList.add('scrolled'); }
+    else { navbar.classList.remove('scrolled'); }
+    // Back to top
+    const btn = document.getElementById('back-to-top');
+    if (window.scrollY > 500) { btn.classList.add('visible'); }
+    else { btn.classList.remove('visible'); }
+    // Active nav
+    updateActiveNav();
+  });
+
+  function updateActiveNav() {
+    const sections = ['home','menu','about','contact'];
+    const scrollY = window.scrollY;
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+      if (!el || !link) return;
+      const top = el.offsetTop - 120;
+      const bottom = top + el.offsetHeight;
+      if (scrollY >= top && scrollY < bottom) {
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }
+
+  // ===== MOBILE MENU =====
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const ham = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    ham.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
+  // ===== SCROLL REVEAL =====
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // staggered children
+        const cards = entry.target.querySelectorAll('.fruit-card');
+        cards.forEach((card, i) => {
+          card.style.transitionDelay = `${i * 0.08}s`;
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(30px)';
+          setTimeout(() => {
+            card.style.transition = 'all 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, i * 80);
+        });
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // ===== SMOOTH SCROLL for nav links =====
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
