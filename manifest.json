@@ -1,0 +1,61 @@
+{
+  "name": "Guru Brothers Juice Shop",
+  "short_name": "Guru Juice",
+  "description": "Premium Fresh Juices & Digital Menu Card",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d4f2d",
+  "theme_color": "#0d4f2d",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["food", "beverages", "restaurant"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwXzBfMSkiLz4KPHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSI1NiIgeT0iNTYiPgo8cGF0aCBkPSJNNDAgNzBDMzUuNTg4NyA3MCAzMiA2NC40MTEzIDMyIDYwQzMyIDU1LjU4ODcgMzUuNTg4NyA1MCA0MCA1MEM0NC40MTEzIDUwIDQ4IDU1LjU4ODcgNDggNjBDNDggNjQuNDExMyA0NC40MTEzIDcwIDQwIDcwWiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMjUgMzBDMjUgMjIuMjY4IDMxLjI2OCAxNSA0MCAxNUM0OC43MzIgMTUgNTUgMjIuMjY4IDU1IDMwQzU1IDM3LjczMiA0OC43MzIgNDUgNDAgNDVDMzEuMjY4IDQ1IDI1IDM3LjczMiAyNSAzMFoiIGZpbGw9IiNGRkZGRkYiLz4KPC9zdmc+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF8wXzEiIHgxPSIwIiB5MT0iMCIgeDI9IjE5MiIgeTI9IjE5MiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjMGQ0ZjJkIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFhOGY1ZSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPg==",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iNjQiIGZpbGw9InVybCgjZ3JhZGllbnQwXzBfMSkiLz4KPHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMTU2IiB5PSIxNTYiPgo8cGF0aCBkPSJNMTAwIDE4MEM4OS43MjA4IDE4MCA4MCAxNzAuMjc5IDgwIDE2MEM4MCAxNDkuNzIxIDg5LjcyMDggMTQwIDEwMCAxNEMxMTAuMjc5IDE0MCAxMjAgMTQ5LjcyMSAxMjAgMTYwQzEyMCAxNzAuMjc5IDExMC4yNzkgMTgwIDEwMCAxODBaIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik02MiA4MEM2MiA2NS43MjA4IDc0LjcyMDggNTAgMTAwIDUwQzEyNS4yNzkgNTAgMTM4IDY1LjcyMDggMTM4IDgwQzEzOCA5NC4yNzkyIDEyNS4yNzkgMTEwIDEwMCAxMTBDNzQuNzIwOCAxMTAgNjIgOTQuMjc5MiA2MiA4MFoiIGZpbGw9IiNGRkZGRkYiLz4KPC9zdmc+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF8wXzEiIHgxPSIwIiB5MT0iMCIgeDI9IjUxMiIgeTI9IjUxMiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjMGQ0ZjJkIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFhOGY1ZSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPg==",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Menu",
+      "short_name": "Menu",
+      "description": "Browse our juice menu",
+      "url": "/#menu",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTIiIGZpbGw9IiMwZDRmMmQiLz4KPHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIyOCIgeT0iMjgiPgo8cGF0aCBkPSJNMjAgMzVDMTYuNjg2MyAzNSAxNCAzMi4zMTM3IDE0IDI5QzE0IDI1LjY4NjMgMTYuNjg2MyAyMyAyMCAyM0MyMy4zMTM3IDIzIDI2IDI1LjY4NjMgMjYgMjlDMjYgMzIuMzEzNyAyMy4zMTM3IDM1IDIwIDM1WiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4KPC9zdmc+",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with us",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTIiIGZpbGw9IiMwZDRmMmQiLz4KPHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIyOCIgeT0iMjgiPgo8cGF0aCBkPSJNMzUgMTVIMzVWMTVIMTVWMjVIMTVWMTVaTTM1IDIwSDE1VjIwSDE1VjIwWk0zNSAyNUgxNVYyNUgxNVYyNVpNMzUgMzBIMTVWMzBIMTVWMzBaIiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo8L3N2Zz4K",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgwIiBoZWlnaHQ9IjY4MCIgdmlld0JveD0iMCAwIDM4MCA2ODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzODAiIGhlaWdodD0iNjgwIiByeD0iMjAiIGZpbGw9IiNGRkZGRkYiLz4KPHJlY3QgeD0iMjAiIHk9IjIwIiB3aWR0aD0iMzQwIiBoZWlnaHQ9IjY0MCIgcng9IjEwIiBmaWxsPSIjRjVGNUY1Ii8+Cjx0ZXh0IHg9IjE5MCIgeT0iMzQwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMGE0ZjJkIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCI+R3VydSBCcm90aGVyczwvdGV4dD4KPHRleHQgeD0iMTkwIiB5PSIzNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NjYiIGZvbnQtc2l6ZT0iMTYiPkJlc3QgSnVpY2UgTWVudTwvdGV4dD4KPC9zdmc+",
+      "sizes": "380x680",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ]
+}
